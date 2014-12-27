@@ -1,9 +1,11 @@
+#!/usr/bin/env python3
 import csv
 import matplotlib.pyplot as plt
 import datetime
 import numpy as np
 
 DATA_FILE = 'local-authority-housing-stock-borough.csv'
+GRAPH_FILE = DATA_FILE[:-3] + 'png'
 
 
 def get_data(file_name):
@@ -11,17 +13,13 @@ def get_data(file_name):
         return fp.readlines()
 
 
-def get_col(data, n):
-    return [d[n] for d in data]
+def get_col(data, col_number):
 
+    def normalise(item):
+        item = item.replace(',', '').replace('..', '0')
+        return int(item)
 
-def normalise(row):
-    res =  []
-    for item in row:
-        to_add = item.replace(',', '')
-        to_add = to_add.replace('..', '0')
-        res.append(int(to_add))
-    return res
+    return [normalise(d[col_number]) for d in data]
 
 
 data = get_data(DATA_FILE)
@@ -29,10 +27,12 @@ data = csv.reader(data)
 header = data.next()
 years = [int(h[-4:]) for h in header[2:]]
 data = [line[2:] for line in data]
-print([sum(normalise(get_col(data, n))) for n in range(20)])
+sums = [sum(get_col(data, n)) for n in range(20)]
 
 x = np.array([datetime.date(n, 1, 1) for n in years])
-y = [sum(normalise(get_col(data, n))) for n in range(20)]
+y = sums
 
-plt.plot(x,y)
-plt.show()
+fig = plt.figure()
+fig.add_subplot(111)
+plt.plot(x, y)
+plt.savefig(GRAPH_FILE)
