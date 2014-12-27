@@ -7,3 +7,4 @@ This is a toy demo
         src="https://raw.githubusercontent.com/arachnegl/london-local-authority-housing-stock/master/index.html">
 </iframe>
 
+You can see the image for example output, or look up index.html in a browser.
