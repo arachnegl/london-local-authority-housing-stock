@@ -25,15 +25,10 @@ settings.configure(
     TEMPLATE_DIRS=(
         os.path.join(BASE_DIR, 'templates'),
     ),
-    STATICFILES_DIR=(
+    STATICFILES_DIRS=(
         os.path.join(BASE_DIR, 'static'),
     ),
     STATIC_URL='/static/',
-    STATIC_ROOT='',
-    STATICFILES_FINDERS=(
-        'django.contrib.staticfiles.finders.FileSystemFinder',
-        'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-    ),
 )
 
 from django.conf.urls import url
@@ -47,13 +42,11 @@ def index(request):
     sums, _ = get_sums_and_years()
     return render(request, 'index.html', {'sums': sums})
 
-
 urlpatterns = (
     url(r'^$', index),
 )
 
 application = get_wsgi_application()
-
 
 if __name__ == "__main__":
     from django.core.management import execute_from_command_line

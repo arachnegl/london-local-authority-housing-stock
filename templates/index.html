@@ -1,18 +1,15 @@
+{% load staticfiles %}
 <html>
 <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <style>
-        .chart rect {
-            fill: steelblue;
-        }
-        .chart text {
-            fill: white;
-            font: 10px sans-serif;
-            text-anchor: end;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/site.css' %}" type="text/css">
 </head>
 <body>
+
+    <script src="{% static 'vendor/jquery.js' %}"></script>
+    <script src="{% static 'vendor/underscore.js' %}"></script>
+    <script src="{% static 'vendor/backbone.js' %}"></script>
+
     <svg class="chart"></svg>
     <script>
         var data = {{ sums }}
@@ -30,8 +27,13 @@
 
         var bar = chart.selectAll("g")
             .data(data)
-        .enter().append("g")
-            .attr("transform", function(d, i) { return "translate(0," + i * barHeight + ")"; });
+            .enter().append("g")
+            .attr(
+                "transform", 
+                function(d, i) { 
+                    return "translate(0," + i * barHeight + ")"; 
+                }
+            );
 
         bar.append("rect")
             .attr("width", x)
