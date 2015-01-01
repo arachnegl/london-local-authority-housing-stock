@@ -3,14 +3,33 @@
 <head>
     <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <link rel="stylesheet" href="{% static 'css/site.css' %}" type="text/css">
+    <script type="text/html" id="local-housing-auth-bars">
+        <svg class="chart"></svg>
+    </script>
 </head>
 <body>
+
+    <div id="content">
+    </div>
 
     <script src="{% static 'vendor/jquery.js' %}"></script>
     <script src="{% static 'vendor/underscore.js' %}"></script>
     <script src="{% static 'vendor/backbone.js' %}"></script>
 
-    <svg class="chart"></svg>
+    <script id="config" type="text/json">
+    {
+        "models": {},
+        "collections": {},
+        "views": {},
+        "router": null
+    }
+    </script>
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="{% static 'js/models.js' %}"></script>
+    <script src="{% static 'js/views.js' %}"></script>
+    <script src="{% static 'js/router.js' %}"></script>
+
     <script>
         var data = {{ sums }}
 
