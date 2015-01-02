@@ -3,22 +3,40 @@
     var AppRouter = Backbone.Router.extend({
 
         routes: {
-            '': 'home'
+            '': 'button',
+            'values': 'graph'
         },
 
         initialize: function (options) {
             this.contentElement = '#content';
+            this.current = null;
             this.header = new app.views.HeaderView();
             $('body').prepend(this.header.el);
             this.header.render();
             Backbone.history.start();
         },
 
-        home: function () {
+        graph: function () {
             var view = new app.views.GraphView({
                 el: this.contentElement
             });
-            view.render();
+            this.render(view);
+        },
+
+        button: function () {
+            var view = new app.views.ButtonView({
+                el: this.contentElement
+            });
+            this.render(view);
+        },
+
+        render: function (view) {
+            if (this.current) {
+                this.current.$el = $();
+                this.current.remove();
+            }
+            this.current = view;
+            this.current.render();
         }
     
     });

@@ -1,3 +1,12 @@
+button, a.button {
+    font-size: 13px;
+    padding: 5px 8px;
+    border: 2px solid #222;
+    background-color: #FFF;
+    color: #222;
+    transition: background 200ms ease-out;
+}
+
 header {
     height: 45px;
     line-height: 45px;

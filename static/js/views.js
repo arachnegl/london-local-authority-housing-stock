@@ -15,6 +15,20 @@
         }
     });
 
+    var ButtonView = Backbone.View.extend({
+
+        templateName: '#button',
+
+        initialize: function () {
+            this.template = _.template($(this.templateName).html());
+        },
+
+        render: function () {
+            var html = this.template();
+            this.$el.html(html);
+        }
+    });
+
     var GraphView = Backbone.View.extend({
 
         templateName: '#local-housing-auth-bars',
@@ -77,5 +91,6 @@
 
     app.views.GraphView = GraphView;
     app.views.HeaderView = HeaderView;
+    app.views.ButtonView = ButtonView;
 
 })(jQuery, Backbone, _, d3, app);
