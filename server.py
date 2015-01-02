@@ -40,19 +40,12 @@ from main import get_sums_and_years
 
 
 def index(request):
-    sums, _ = get_sums_and_years()
-    return render(request, 'index.html', {'sums': sums})
+    return render(request, 'index.html')
 
 
 def get_results(request):
     import json
-    data = [
-        645588, 635219, 625662, 618621, 593616,
-        573286, 551006, 530015, 515975, 499705,
-        482835, 468318, 456761, 450881, 435542,
-        432937, 403672, 404225, 412822, 410011
-    ]
-
+    data, _ = get_sums_and_years()
     result = {'values': data}
     result = json.dumps(result)
 
