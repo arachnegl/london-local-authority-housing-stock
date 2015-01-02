@@ -1,5 +1,20 @@
 (function ($, Backbone, _, app) {
 
+    var HeaderView = Backbone.View.extend({
+
+        tagName: 'header',
+        templateName: '#header',
+
+        initialize: function () {
+            this.template = _.template($(this.templateName).html());
+        },
+
+        render: function () {
+            var html = this.template();
+            this.$el.html(html);
+        }
+    });
+
     var GraphView = Backbone.View.extend({
 
         templateName: '#local-housing-auth-bars',
@@ -61,5 +76,6 @@
     });
 
     app.views.GraphView = GraphView;
+    app.views.HeaderView = HeaderView;
 
 })(jQuery, Backbone, _, app);

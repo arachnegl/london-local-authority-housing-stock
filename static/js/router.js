@@ -8,6 +8,9 @@
 
         initialize: function (options) {
             this.contentElement = '#content';
+            this.header = new app.views.HeaderView();
+            $('body').prepend(this.header.el);
+            this.header.render();
             Backbone.history.start();
         },
 
