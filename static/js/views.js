@@ -1,4 +1,4 @@
-(function ($, Backbone, _, app) {
+(function ($, Backbone, _, d3, app) {
 
     var HeaderView = Backbone.View.extend({
 
@@ -78,4 +78,4 @@
     app.views.GraphView = GraphView;
     app.views.HeaderView = HeaderView;
 
-})(jQuery, Backbone, _, app);
+})(jQuery, Backbone, _, d3, app);
