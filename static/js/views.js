@@ -21,43 +21,42 @@
 
         drawGraph: function () {
 
-            var data = [
-                645588, 635219, 625662, 618621, 593616, 
-                573286, 551006, 530015, 515975, 499705, 
-                482835, 468318, 456761, 450881, 435542, 
-                432937, 403672, 404225, 412822, 410011
-            ];
+            var result = $.ajax('http://localhost:8000/api/values');
+            result.success( function (data) {
 
-            var width = 420,
-                barHeight = 20;
+                var data = data.values;
 
-            var x = d3.scale.linear()
-                .domain([0, d3.max(data)])
-                .range([0, width]);
+                var width = 420,
+                    barHeight = 20;
 
-            var chart = d3.select(".chart")
-                .attr("width", width)
-                .attr("height", barHeight * data.length);
+                var x = d3.scale.linear()
+                    .domain([0, d3.max(data)])
+                    .range([0, width]);
 
-            var bar = chart.selectAll("g")
-                .data(data)
-                .enter().append("g")
-                .attr(
-                    "transform", 
-                    function(d, i) { 
-                        return "translate(0," + i * barHeight + ")"; 
-                    }
-                );
+                var chart = d3.select(".chart")
+                    .attr("width", width)
+                    .attr("height", barHeight * data.length);
 
-            bar.append("rect")
-                .attr("width", x)
-                .attr("height", barHeight - 1);
+                var bar = chart.selectAll("g")
+                    .data(data)
+                    .enter().append("g")
+                    .attr(
+                        "transform", 
+                        function(d, i) { 
+                            return "translate(0," + i * barHeight + ")"; 
+                        }
+                    );
 
-            bar.append("text")
-                .attr("x", function(d) { return x(d) - 3; })
-                .attr("y", barHeight / 2)
-                .attr("dy", ".35em")
-                .text(function(d) { return d; });
+                bar.append("rect")
+                    .attr("width", x)
+                    .attr("height", barHeight - 1);
+
+                bar.append("text")
+                    .attr("x", function(d) { return x(d) - 3; })
+                    .attr("y", barHeight / 2)
+                    .attr("dy", ".35em")
+                    .text(function(d) { return d; });
+            });
         }
     });
 
